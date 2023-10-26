@@ -1,0 +1,13 @@
+package service.shiku_wallet.protocol;
+
+message GetMintReq {
+    required string canister = 1;
+    required string to = 2;
+    optional CoCreateMetaData prop = 3;
+}
+
+message CoCreateMetaData {
+    optional string logo = 1;
+    optional string name = 2;
+    optional string description = 3;
+}

@@ -1,0 +1,50 @@
+{
+  "nested": {
+    "service": {
+      "nested": {
+        "shiku_wallet": {
+          "nested": {
+            "protocol": {
+              "nested": {
+                "GetMintReq": {
+                  "fields": {
+                    "canister": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "to": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 2
+                    },
+                    "prop": {
+                      "type": "CoCreateMetaData",
+                      "id": 3
+                    }
+                  }
+                },
+                "CoCreateMetaData": {
+                  "fields": {
+                    "logo": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

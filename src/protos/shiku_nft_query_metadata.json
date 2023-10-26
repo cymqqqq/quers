@@ -1,0 +1,25 @@
+{
+  "nested": {
+    "service": {
+      "nested": {
+        "shiku_wallet": {
+          "nested": {
+            "protocol": {
+              "nested": {
+                "QueryMetaData": {
+                  "fields": {
+                    "principal": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

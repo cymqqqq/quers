@@ -1,0 +1,6 @@
+package service.shiku_wallet.protocol;
+
+
+message QueryMetaData {
+    required string principal = 1;
+}
