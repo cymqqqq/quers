@@ -1,9 +1,6 @@
 import { Options } from '@mikro-orm/core';
 
-import { FileUpload } from '../entities/FileUploadEntity';
-import { YumiNft } from '../entities/NftEntity';
-import { YumiNftTest } from '../entities/NftEntityTest';
-import { ShikuNftOwner } from '../entities/NftOwnerEntity';
+
 import { icWalletUser } from "../entities/UserEntity";
 /** 
  * Mikro ORM Connection options object
@@ -12,11 +9,12 @@ import { icWalletUser } from "../entities/UserEntity";
  *  */
 export const options: Options = {
   type: 'mongo',
-  entities: [icWalletUser, YumiNft,YumiNftTest , ShikuNftOwner, FileUpload],
+  entities: [icWalletUser],
   // dbName: 'TechDem
   dbName: 'ic-wallet',
   debug: true
 };
+
 
 // export const yumi_nft_options: Options = {
 //   type: 'mongo',

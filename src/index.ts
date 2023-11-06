@@ -21,12 +21,7 @@ console.log("启动程序");
 // list();
 // import  {connectRedis} from "./redis/redis";
 import accountRoutes from "./routes/accountRoutes";
-import shikuRoutes from "./routes/shikRoutes";
-import yumiRoutes from "./routes/yumiRoutes";
-import cloudRoutes from "./routes/cloudRoutes";
-import oracleRoutes from "./routes/oracleRoutes";
-import shikuTestTokenRoutes from "./routes/shikuTestTokenRoutes";
-import canisterFactoryRoutes from "./routes/factoryRoutes"
+
 require('dotenv').config({ path: 'development.env' });
 
 var swaggerInstall = require("./config/swagger");
@@ -60,12 +55,7 @@ console.log(getAccountId(pid));
 // console.log(pid.toString());
 // console.log(pid.toUint8Array())
 // console.log(Principal.fromUint8Array(param).toString());
-import { create_shiku_collection,
-    remove_shiku_collection,
-    sellDutchAuctionController,
-    importCollection,
-    nftInfo
- } from "./controller/yumiController";
+
 import { boe, online } from "./utils/config";
 // create_shiku_collection()
 // remove_shiku_collection("ysevz-xyaaa-aaaah-adj7a-cai")
@@ -84,11 +74,7 @@ app.use('/health', async function (req, res, next) {
     res.json('OK');
 });
 app.use('/account', accountRoutes);
-app.use('/shiku', shikuRoutes);
-app.use('/yumi', yumiRoutes);
-app.use('/cloud', cloudRoutes);
-app.use('/oracle', oracleRoutes);
-app.use('/canister_factory', canisterFactoryRoutes)
+
 // app.use('/shiku_test_token', shikuTestTokenRoutes);
 // console.log("服务器启动端口", process.env.SERVER_PORT);
 console.log("服务器启动端口", process.env.SERVER_PORT);

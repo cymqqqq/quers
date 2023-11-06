@@ -2,8 +2,7 @@ import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/core';
 import {options} from './mikro-orm.config';
 
 import { icWalletUser } from "../entities/UserEntity";
-import { YumiNft } from '../entities/NftEntity';
-import { YumiNftTest } from '../entities/NftEntityTest';
+
 /**
  * This demo makes use of Mikro ORM to manage the database connection and CRUD operations of our User entity (https://mikro-orm.io/)
  */
@@ -12,8 +11,8 @@ export const DI = {} as {
   orm: MikroORM,
   em: EntityManager,
   userRepository: EntityRepository<icWalletUser>,
-  yumiNftRepository:  EntityRepository<YumiNft>
 };
+
 
 /**
  * Initiate connection to the database
