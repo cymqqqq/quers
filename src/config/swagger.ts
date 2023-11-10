@@ -7,9 +7,9 @@ const options = {
     definition: {
         openapi: "3.0.1",
         info: {
-            title: "Shiku平台Wallet API文档",
+            title: "quers api doc",
             version: '1.0.0',
-            description: "Shiku平台Wallet API文档"
+            description: "quers api doc"
         },
     },
     apis: [path.join(__dirname, '../routes/*')]

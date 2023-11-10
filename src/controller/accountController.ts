@@ -14,11 +14,7 @@ import {
 import { LedgerController } from './accountLedgerContoller';
 import {
     createBlockActor,
-    createBlockIndexActorFake,
     createLedgerActor,
-    createLedgerActorFake,
-    createShikuTestTokenActor,
-    createShikuTestTokenBlockIndexActor
 } from "./actorController";
 import { shiku_wallet_user_data_service, shiku_wallet_user_phase_find_service } from './dataServiceController';
 import { JsonObject } from '@dfinity/candid';
@@ -73,29 +69,6 @@ export const queryNewestBlockIndexController = async (req: any, res: any, next: 
     }
 }
 
-// query fake newest block index controller
-export const queryFakeNewestBlockIndexController = async (req: any, res: any, next: any) => {
-    let tip_index: any
-    try {
-        // set tip of chain variable
-        let tip_of_chain: any = "";
-        // get block actor from create block index actor function
-        let block_actor = await createBlockIndexActorFake(mnemonicWord.yumengAccount);
-        // get value of fake newest block
-        tip_of_chain = await block_actor.tip_of_chain();
-        tip_index = tip_of_chain.Ok? (tip_of_chain.Ok.tip_index ? tip_of_chain.Ok.tip_index : "no tip index") : "none value in tip of chain"
-        // return json value
-        res.json({
-            result: tip_index.toString()
-        })
-    } catch (e) {
-        console.log("error ",e)
-        res.json({
-            result: e
-        })
-    }
-    
-}
 
 // query block
 export const query_block = async (index: any) => {
@@ -229,65 +202,7 @@ export const send = async (phase: any, to: any, amount: any, canister_id: any) =
     return res;
 }
 
-// common fake transfer icp
-export const send_fake = async (phase: any, to: any, amount: any, canister_id: any) => {
-    // create fake ledger actor
-    const actor = await createLedgerActorFake(phase, canister_id);
-    // transform string address to principal id
-    const pid = Principal.fromText(to);
-    // get account id array
-    const aidarr = getAidArrByPid(pid);
-    // set transfer params
-    const params = {
-        // receiver address
-        to: aidarr,
-        // transfer fee
-        fee: { e8s: 10000 },
-        memo: 0,
-        from_subaccount: [Array(28).fill(0).concat(to32bits(0))],
-        created_at_time: [] as string[],
-        amount: { e8s: BigInt(amount * 1e8) },
-    }
-    // perform transfer action
-    const res = await actor.transfer(params);
-    return res;
-}
 
-
-export const stt_withdraw = async (canister_id: any, principal: any, stt_amount: any) => {
-    let transfer_res: any;
-    let stt_actor: any;
-    let pid: any;
-    let amount: any;
-    try {
-        stt_actor = await createShikuTestTokenActor(canister_id);
-        pid = Principal.fromText(principal);
-        let to: any = {
-            owner: pid,
-            subaccount: [],
-        };
-        amount = stt_amount;
-        let obj: any = {
-            to: to,
-            amount: parseInt(amount),
-            fee: [],
-            memo: [],
-            from_subaccount: [],
-            created_at_time: [],
-        }
-        transfer_res = await stt_actor.icrc1_transfer(obj);
-        console.log(transfer_res)
-        return JSON.parse(transfer_res.Ok)
-        // res.status(201).json({
-        //     result: JSON.parse(transfer_res.Ok),
-        // })
-    } catch (e) {
-        console.log("error ", e)
-        // res.json({
-
-        // })
-    }
-}
 
 // withdraw controller
 // export const withdraw_controller = async (req: any, res: any, next: any) => {
@@ -333,28 +248,7 @@ export const withdraw_controller = async (req: any, res: any, next: any) => {
         }
     
     }
-    
 
-// fake withdraw controller
-export const withdraw_controller_fake = async (req: any, res: any, next: any) => {
-    try {
-        // set transfer result variable
-        let send_res: any = {};
-        // perform fake withdraw action
-        send_res = await send_fake(mnemonicWord.yumengAccount, req.body.to_principal, req.body.amount, req.body.canister_id);
-        // console.log(send_res.Ok)
-        // return json
-        res.json({
-            result: send_res.Ok.toString()
-        }) 
-    } catch (e) {
-        console.log("interface error ", e);
-        res.json(
-            {result: e}
-        ) 
-    }
-
-}
 
 // refund controller 
 export const refund_controller = async (req: any, res: any) => {
@@ -377,27 +271,7 @@ export const refund_controller = async (req: any, res: any) => {
     }
 }
 
-// fake refund controller
-export const refund_controller_fake = async (req: any, res: any) => {
-    try {
-        // fake refund result variable
-        let send_res: any = {};
-        let phase: any;
-        phase = await shiku_wallet_user_phase_find_service(req.body.from_principal);
-        
-        // perform fake refund action
-        send_res = await send_fake(phase, req.body.to_principal, req.body.amount, req.body.canister_id);
-        // return json
-        res.json({
-            result: send_res.Ok.toString()
-        }) 
-    } catch (e) {
-        console.log("interface error ", e);
-        res.json(
-            {result: e}
-        ) 
-    }
-}
+
 
 //uid: user phase
 //user: principal id or account id
@@ -420,87 +294,6 @@ export const accountBalance = async (user: any, canister_id:any) => {
     return icp;
 }
 
-export const accountBalance_ShikuTestToken = async (canister_id: any, principal: any) => {
-    let balance_json: any;
-    let stt_actor: any;
-    let pid: any;
-    try {
-        stt_actor = await createShikuTestTokenActor(canister_id);
-        pid = Principal.fromText(principal);
-        let owner_obj: any = {
-            owner: pid,
-            subaccount: [],
-        };
-        balance_json = await stt_actor.icrc1_balance_of(owner_obj);
-        
-        return JSON.parse(balance_json)
-    } catch (e) {
-        console.log("error ", e)
-    }
-}
-
-
-//uid: user phase
-//user: principal id or account id
-export const accountBalance_fake = async (user: any, canister_id: any) => {
-    if (user.match(/-/)) {
-
-        user = getAidArrByPid(Principal.fromText(user));
-    } else {
-        user = Array.from(fromHexString(user));
-    }
-    // create fake ledger actor
-    let ledger_actor = await createLedgerActorFake(mnemonicWord.yumengAccount, canister_id);
-    // get fake account balance from user principal
-    let res = ledger_actor.account_balance({ account: user });
-    return res;
-}
-
-// fake query block
-export const query_block_fake = async (index: any) => {
-    // create fake block index actor
-    let block_actor = await createBlockIndexActorFake(mnemonicWord.yumengAccount);
-    // set fake block result variable
-    let res: any = {};
-    // query fake block info from block index
-    res = await block_actor.block(index);
-    // extract to address from block 
-    let to = res.Ok.Ok.transaction.transfer.Send.to;
-    // extract from address from block 
-    let from = res.Ok.Ok.transaction.transfer.Send.from;
-    // extract transfer amount from block
-    let amount = res.Ok.Ok.transaction.transfer.Send.amount.e8s.toString();
-    // process icp accuracy
-    // let icp_amount = get_icp(amount);
-    // extract timestamp from block result
-    let ts = res.Ok.Ok.timestamp.timestamp_nanos.toString();
-    // return json
-    let json: any = {
-        "from": from,
-        "to": to,
-        "amount": amount,
-        "timestamp": ts,
-    }
-    return json;
-}
-
-// fake query block controller
-export const query_block_fake_controller = async (req: any, res: any, next: any) => {
-    try {
-        // set fake block result variable
-        let block_res:any = {};
-        // query fake block result from block index
-        block_res = await query_block_fake(parseInt(req.body.index));
-        res.status(201).json({
-            result: block_res
-        })
-    } catch (e) {
-        console.log(e);
-        res.json({
-            result: e
-        })
-    }
-}
 
 // process icp accuracy
 export const get_icp = (big_num: any) => {
@@ -535,148 +328,7 @@ export const account_balance_controller = async (req: any, res: any) => {
     
 }
 
-// fake account balance controller
-export const account_balance_controller_fake = async (req: any, res: any) => {
-    // set fake account balance result variable
-    let account_balance_result: any = {}; 
-    try {
-        // get fake account balance result 
-        account_balance_result = await accountBalance_fake(req.body.user, req.body.canister_id);
-        // extract icp
-        let icp = account_balance_result.e8s ? account_balance_result.e8s : 0;
-        console.log(icp);
-        // return json
-        res.json({
-            result: JSON.parse(icp)
-            // result: get_icp(icp)
-        })  
-    } catch (e) {
-        console.log(e);
-        res.json({
-            result: e
-        })
-    }
-    
-}
- 
-export const stt_query_newest_block = async (stt_canister: any) => {
-    let query_res: any;
-    let stt_actor: any;
-    let stt_block_index_actor: any;
-    let hash_tree: any;
-    try {
-        stt_actor = await createShikuTestTokenActor(stt_canister);
-        stt_block_index_actor = await createShikuTestTokenBlockIndexActor()
-        query_res = await stt_block_index_actor.total_transactions();
-        
-        console.log(query_res)
-        
-    } catch (e) {
-        console.log("error ",e);
-    }
-}
 
-export const stt_transfer = async (stt_canister: any, stt_principal: any, stt_amount: any) => {
-    let transfer_res: any;
-    let stt_actor: any;
-    let pid: any;
-    let amount: any;
-    // let canister_id: any
-    try {
-        stt_actor = await createShikuTestTokenActor(stt_canister);
-        pid = Principal.fromText(stt_principal);
-        let to: any = {
-            owner: pid,
-            subaccount: [],
-        };
-        amount = stt_amount;
-        let obj: any = {
-            to: to,
-            amount: parseInt(amount),
-            fee: [],
-            memo: [],
-            from_subaccount: [],
-            created_at_time: [],
-        }
-        transfer_res = await stt_actor.icrc1_transfer(obj);
-        console.log(transfer_res)
-        return JSON.parse(transfer_res.Ok)
-        // res.status(201).json({
-        //     result: JSON.parse(transfer_res.Ok),
-        // })
-    } catch (e) {
-        console.log("error ", e)
-        
-    }
-}
-
-export const stt_get_transactions = async (canister_id: any, start_index: any, block_length: any) => {
-    let transaction_res: any;
-    let stt_actor: any;
-    let start: any;
-    let length: any;
-    let json_res: any;
-    try {
-        stt_actor = await createShikuTestTokenActor(canister_id);
-        start = start_index;
-        length = block_length;
-        let obj: any = {
-            start: parseInt(start),
-            length: parseInt(length),
-        }
-        transaction_res = await stt_actor.get_transactions(obj);
-        console.log(transaction_res)
-        console.log(transaction_res.transactions[0].mint[0].to.owner.toString())
-        console.log(transaction_res.transactions[0].mint[0].amount)
-        let timestamp = transaction_res.transactions[0].timestamp ? transaction_res.transactions[0].timestamp : "timestamp is none"
-        json_res = {
-            "timestamp": timestamp.toString(),
-            "to": transaction_res.transactions[0].mint[0].to.owner.toString(),
-            "amount": transaction_res.transactions[0].mint[0].amount.toString()
-        }
-        // console.log(transaction_res.transactions[0].mint[0])
-        return JSON.parse(JSON.stringify(json_res))
-        // res.status(201).json({
-        //     result: transaction_res,
-        // })
-    } catch (e) {
-        console.log("error ", e)
-        // res.json({
-
-        // })
-    }
-}
-
-export const stt_get_transaction = async (canister_id: any, start_index: any) => {
-    let transaction_res: any;
-    let stt_actor: any;
-    let start: any;
-    let json_res: any;
-    try {
-        stt_actor = await createShikuTestTokenActor(canister_id);
-        start = start_index;
-        let obj: any = start_index
-        transaction_res = await stt_actor.get_transaction(parseInt(obj));
-        // console.log(transaction_res[0])
-        // console.log(transaction_res[0].mint[0].to.owner.toString())
-        // console.log(transaction_res[0].mint[0].amount)
-        json_res = {
-            "timestamp": transaction_res[0].timestamp.toString(),
-            "to": transaction_res[0].mint[0].to.owner.toString(),
-            "amount": transaction_res[0].mint[0].amount.toString()
-        }
-        // console.log(transaction_res.transactions[0].mint[0])
-        return JSON.parse(JSON.stringify(json_res))
-        // res.status(201).json({
-        //     result: transaction_res,
-        // })
-    } catch (e) {
-        console.log("error ", e)
-        // res.json({
-
-        // })
-    }
-}
 
 export const generatePid = async () => {
     const TEST_MNEMONIC = generateMnemonic();

@@ -22,16 +22,7 @@ const router = express.Router();
  *       canister_id:
  *         type: string
  */ 
-/**
- * @swagger
- * definitions:
- *   tokenBalanceFakeReq:
- *     properties:
- *       user:
- *         type: string
- *       canister_id:
- *         type: string
- */ 
+
 
 /**
  * @swagger
@@ -88,20 +79,7 @@ const router = express.Router();
  *       canister_id:
  *         type: string
  */ 
-/**
- * @swagger
- * definitions:
- *   RefundFakeReq:
- *     properties:
- *       from_principal:
- *         type: string
- *       to_principal:
- *         type: string
- *       amount:
- *         type: number
- *       canister_id:
- *         type: string
- */ 
+
 
 /**
  * @swagger
@@ -116,18 +94,6 @@ const router = express.Router();
  *         type: string
  */ 
 
-/**
- * @swagger
- * definitions:
- *   withDrawFakeReq:
- *     properties:
- *       to_principal:
- *         type: string
- *       amount:
- *         type: number
- *       canister_id:
- *         type: string
- */ 
 /**
  * @swagger
  * /account/queryBlock:
@@ -184,20 +150,6 @@ router.post("/queryBlockFake", accountController.query_block_ledger_controller);
  *        description: return the newest block index
  */
 router.post("/queryNewestBlock", accountController.queryNewestBlockIndexController);
-/**
- * @swagger
- * /account/queryFakeNewestBlock:
- *  post:
- *    tags:
- *      - account
- *    summary: query fake infomatio of the specific block height
- *    description: query fake infomatio of the specific block height
- *    responses:
- *      200:
- *        description: return the data
- */
-router.post("/queryFakeNewestBlock", accountController.queryFakeNewestBlockIndexController);
-
 
 
 
@@ -239,24 +191,6 @@ router.post("/scanBlock", accountController.scanBlockController);
  *        description: return ICP balance of current address
  */
 router.post("/tokenBalance", accountController.account_balance_controller);
-/**
- * @swagger
- * /account/tokenBalanceFake:
- *  post:
- *    tags:
- *      - account
- *    summary: query fake token balance of current ICP address
- *    description: query fake token balance of current ICP address
- *    requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/definitions/tokenBalanceFakeReq'
- *    responses:
- *      200:
- *        description: return ICP balance of current address
- */
-router.post("/tokenBalanceFake", accountController.account_balance_controller_fake);
 
 
 /**
@@ -309,24 +243,6 @@ router.get("/getPid", accountController.get_pid_controller);
  */
 router.post("/refund", accountController.refund_controller);
 
-/**
- * @swagger
- * /account/refundFake:
- *  post:
- *    tags:
- *      - account
- *    summary: user refund fake icp to shiku account.
- *    description: user refund fake icp to shiku account.
- *    requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/definitions/RefundFakeReq'
- *    responses:
- *      200:
- *        description: return block height
- */
-router.post("/refundFake", accountController.refund_controller_fake);
 
 /**
  * @swagger
@@ -347,23 +263,6 @@ router.post("/refundFake", accountController.refund_controller_fake);
  */
 router.post("/withdraw", accountController.withdraw_controller);
 
-/**
- * @swagger
- * /account/withdrawFake:
- *  post:
- *    tags:
- *      - account
- *    summary: shiku account withdraw fake icp to user.
- *    description: shiku account withdraw fake icp to user.
- *    requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/definitions/withDrawFakeReq'
- *    responses:
- *      200:
- *        description: return block height
- */
-router.post("/withdrawFake", accountController.withdraw_controller_fake);
+
 
 export default router;

@@ -58,11 +58,8 @@ export const online = {
     shiku_lands_prod: '3j32q-6iaaa-aaaap-aaijq-cai',
 };
 
-const canisterId = {
-    abcCollection: 'wg45t-qiaaa-aaaah-abflq-cai',
-};
 
-const mnemonicWord = {
+export const mnemonicWord = {
     simonAccount: userJson.simonAccount,
     jayzAccount: userJson.jayzAccount,
     yumengAccount: userJson.yumengAccount,
@@ -71,18 +68,8 @@ const mnemonicWord = {
 };
 
 
-const noMethodCollection = {
-    cid: 'xzrh4-zyaaa-aaaaj-qagaa-cai',
-    cid: 'mfhqa-iyaaa-aaaai-abona-cai',
-    cid: 'n46fk-6qaaa-aaaai-ackxa-cai',
-    cid: '3sxmo-naaaa-aaaao-aakqa-cai',
-    cid: 'ecujo-liaaa-aaaam-aafja-cai',
-    cid: 'telr2-5qaaa-aaaai-qiumq-cai',
-    cid: 'ah2fs-fqaaa-aaaak-aalya-cai',
-    cid: 'cr2rc-vaaaa-aaaap-aakwa-cai'
-};
 
-const HOST = "https://boundary.ic0.app";
+export const HOST = "https://boundary.ic0.app";
 export const IC_SCAN =  "https://icscan.io/canister/"
 let yumiCid,
     ledgerCid,
@@ -139,28 +126,6 @@ if (process.env.RUN_ENV === 'online') {
     artistCid = online.artist;
 }
 
-module.exports = {
-    IC_SCAN,
-    boe,
-    ppe,
-    online,
-    canisterId,
-    mnemonicWord,
-    noMethodCollection,
-    HOST,
-
-    yumiCid,
-    ledgerCid,
-    recordCid,
-    newRecordCid,
-    launchpadCid,
-    pointCid,
-    oatCid,
-    blockIndexCid,
-    origynCid,
-    ogyLaunchpadCid,
-    ogyMarketCid,
-};
 
 
 
