@@ -92,4 +92,65 @@ router.post("/updateUserProfile", UserController.update_profile_description_cont
  */
 router.post("/updateUserFollowers", UserController.update_user_followers_controller);
 
+
+/**
+ * @swagger
+ * definitions:
+ *   updateUserHoldersReq:
+ *     properties:
+ *       owner:
+ *         type: string
+ *       holders:
+ *         type: string
+ */ 
+
+/**
+ * @swagger
+ * /user/updateUserHolders:
+ *  post:
+ *    tags:
+ *      - user
+ *    summary: update user holders
+ *    description: update user holders
+ *    requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/updateUserHoldersReq'
+ *    responses:
+ *      200:
+ *        description: return the data
+ */
+router.post("/updateUserHolders", UserController.update_user_holders_controller);
+
+/**
+ * @swagger
+ * definitions:
+ *   updateUserTvlReq:
+ *     properties:
+ *       owner:
+ *         type: string
+ *       tvl:
+ *         type: string
+ */ 
+
+/**
+ * @swagger
+ * /user/updateUserTvl:
+ *  post:
+ *    tags:
+ *      - user
+ *    summary: update user holding
+ *    description: update user holding
+ *    requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/updateUserTvlReq'
+ *    responses:
+ *      200:
+ *        description: return the data
+ */
+router.post("/updateUserTvl", UserController.update_user_tvl_controller);
+
 export default router

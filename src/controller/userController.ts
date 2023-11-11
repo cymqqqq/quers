@@ -77,3 +77,72 @@ export async function update_user_followers_controller(req: any, res: any, next:
         })
     }
 }
+
+
+export async function update_user_holders_controller(req: any, res: any, next: any) {
+    try {
+        createUserActor().then((actor: any) => {
+            actor.update_user_holders({
+                owner: Principal.fromText(req.body.owner),
+                holders: parseInt(req.body.holders),
+            }).then((result: any) => {
+                console.log("result ", result)
+                res.json({
+                    code: 20000,
+                    data: result,
+                })
+            })
+        })
+    } catch (e) {
+        console.log("error ", e)
+        res.json({
+            result: e
+        })
+    }
+}
+
+export async function update_user_holding_controller(req: any, res: any, next: any) {
+    try {
+        createUserActor().then((actor: any) => {
+            actor.update_user_holding({
+                owner: Principal.fromText(req.body.owner),
+                holding: parseInt(req.body.holding),
+            }).then((result: any) => {
+                console.log("result ", result)
+                res.json({
+                    code: 20000,
+                    data: result,
+                })
+            })
+        })
+    } catch (e) {
+        console.log("error ", e)
+        res.json({
+            result: e
+        })
+    }
+}
+
+
+export async function update_user_tvl_controller(req: any, res: any, next: any) {
+    try {
+        createUserActor().then((actor: any) => {
+            actor.update_user_tvl({
+                owner: Principal.fromText(req.body.owner),
+                tvl: parseInt(req.body.tvl),
+            }).then((result: any) => {
+                console.log("result ", result)
+                res.json({
+                    code: 20000,
+                    data: result,
+                })
+            })
+        })
+    } catch (e) {
+        console.log("error ", e)
+        res.json({
+            result: e
+        })
+    }
+}
+
