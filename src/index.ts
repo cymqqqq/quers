@@ -1,28 +1,11 @@
 console.log("启动程序");
 
-// const Consul = require('consul');
-// const consul = new Consul({ host: 'localhost', port: 8500, promisify: true, });
-// console.log(consul);
-
-// async function deregister() {
-//     await consul.agent.service.deregister("test");
-// }
-
-// async function list() {
-//     let list = await consul.agent.service.list();
-//     console.log("服务列表");
-//     console.log(list);
-//     var test = list['test'];
-//     if(test) {
-//         console.log(test.host)
-//     }
-// }
-
-// list();
-// import  {connectRedis} from "./redis/redis";
 import accountRoutes from "./routes/accountRoutes";
 import oauthRoutes from "./routes/oauthRoutes";
 import userRoutes from "./routes/userRoutes";
+import homepageRoutes from "./routes/homepageRoutes";
+import answerRoutes from "./routes/answerRoutes";
+
 
 require('dotenv').config({ path: 'development.env' });
 
@@ -54,7 +37,10 @@ app.use('/health', async function (req, res, next) {
 app.use('/account', accountRoutes);
 app.use('/twitter', oauthRoutes);
 app.use('/user', userRoutes);
+app.use('/homepage', homepageRoutes);
+app.use('/answer', answerRoutes);
 
+// g5fwl-3aaaa-aaaah-adtlq-cai-1
 
 // console.log("服务器启动端口", process.env.SERVER_PORT);
 console.log("服务器启动端口", process.env.SERVER_PORT);
