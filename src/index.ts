@@ -5,6 +5,7 @@ import oauthRoutes from "./routes/oauthRoutes";
 import userRoutes from "./routes/userRoutes";
 import homepageRoutes from "./routes/homepageRoutes";
 import answerRoutes from "./routes/answerRoutes";
+import commentRoutes from "./routes/commentRoutes";
 
 
 require('dotenv').config({ path: 'development.env' });
@@ -39,6 +40,8 @@ app.use('/twitter', oauthRoutes);
 app.use('/user', userRoutes);
 app.use('/homepage', homepageRoutes);
 app.use('/answer', answerRoutes);
+app.use('/comment', commentRoutes);
+
 
 // g5fwl-3aaaa-aaaah-adtlq-cai-1
 

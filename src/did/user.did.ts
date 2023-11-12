@@ -12,6 +12,7 @@ export const idlFactory = ({ IDL }) => {
   });
   const Args_1 = IDL.Record({
     'comment_content' : IDL.Text,
+    'question_id' : IDL.Text,
     'answer_pid' : IDL.Principal,
     'comment_pid' : IDL.Principal,
   });

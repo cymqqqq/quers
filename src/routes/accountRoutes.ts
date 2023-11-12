@@ -34,16 +34,7 @@ const router = express.Router();
  *       canister_id:
  *         type: string
  */
-/**
- * @swagger
- * definitions:
- *   queryBlockFakeReq:
- *     properties:
- *       index:
- *         type: string
- *       canister_id:
- *         type: string
- */
+
 
 /**
  * @swagger
@@ -112,24 +103,7 @@ const router = express.Router();
  *        description: return the data
  */
 router.post("/queryBlock", accountController.query_block_controller);
-/**
- * @swagger
- * /account/queryBlockFake:
- *  post:
- *    tags:
- *      - account
- *    summary: query infomatio of the specific block height
- *    description: query infomatio of the specific block height
- *    requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/definitions/queryBlockFakeReq'
- *    responses:
- *      200:
- *        description: return the data
- */
-router.post("/queryBlockFake", accountController.query_block_ledger_controller);
+
 
 
 /**
