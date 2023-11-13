@@ -101,32 +101,32 @@ export const query_block = async (index: any) => {
     return json_;
 }
 
-// scan block controller
-export const scanBlockController = async (req: any, res: any, next: any) => {
-    try {
-        // set vector result variable
-        let vec_res: any = [];
-        // set start index
-        let start = req.body.start;
-        // set end index
-        let end = req.body.end;
-        // scan cycle
-        for (start; start <= end; start++) {
-            let res = await query_block(BigInt(start));
-            vec_res.push(res);
-        }
+// // scan block controller
+// export const scanBlockController = async (req: any, res: any, next: any) => {
+//     try {
+//         // set vector result variable
+//         let vec_res: any = [];
+//         // set start index
+//         let start = req.body.start;
+//         // set end index
+//         let end = req.body.end;
+//         // scan cycle
+//         for (start; start <= end; start++) {
+//             let res = await query_block(BigInt(start));
+//             vec_res.push(res);
+//         }
    
-        res.json({
-            result: vec_res
-        })
-    } catch (e) {
-        console.log("error ", e)
-        res.json({
-            result: e
-        })
-    }
+//         res.json({
+//             result: vec_res
+//         })
+//     } catch (e) {
+//         console.log("error ", e)
+//         res.json({
+//             result: e
+//         })
+//     }
     
-}
+// }
 
 // query block controller
 export const query_block_controller = async (req: any , res: any) => {
@@ -330,19 +330,18 @@ export const account_balance_controller = async (req: any, res: any) => {
 
 
 
-export const generatePid = async () => {
-    const TEST_MNEMONIC = generateMnemonic();
-    let identity = await getIdentityFromSeed(TEST_MNEMONIC);
-    let pid_str = identity.getPrincipal()
-    let account = getAccountId(pid_str, SUB_ACCOUNT_ZERO)
-    let json_ = {
-        "memory": TEST_MNEMONIC,
-        "pid": identity.getPrincipal().toString(),
-        "account": account
-    }
-    return json_; 
-    // console.log("generated principal ", identity.getPrincipal().toString());
-}
+// export const generatePid = async () => {
+//     const TEST_MNEMONIC = generateMnemonic();
+//     let identity = await getIdentityFromSeed(TEST_MNEMONIC);
+//     let pid_str = identity.getPrincipal()
+//     let account = getAccountId(pid_str, SUB_ACCOUNT_ZERO)
+//     let json_ = {
+//         "memory": TEST_MNEMONIC,
+//         "pid": identity.getPrincipal().toString(),
+//         "account": account
+//     }
+//     return json_; 
+// }
 
 // export const query_memonic_controller = async (req: any, res: any, next: any) => {
 //     const icWalletUserRepo = DI.em.fork().getRepository(icWalletUser);
@@ -357,10 +356,10 @@ export const generatePid = async () => {
 //         })
 //     }
 // }
-export const get_pid_controller = async (req: any, res: any) => {
-    let pid_result = await generatePid();
-    await shiku_wallet_user_data_service(pid_result);
-    res.json({
-        result: pid_result
-    })
-}
+// export const get_pid_controller = async (req: any, res: any) => {
+//     let pid_result = await generatePid();
+//     await shiku_wallet_user_data_service(pid_result);
+//     res.json({
+//         result: pid_result
+//     })
+// }

@@ -45,16 +45,16 @@ const router = express.Router();
  *         type: string
  */
 
-/**
- * @swagger
- * definitions:
- *   scanBlockReq:
- *     properties:
- *       start:
- *         type: string
- *       end:
- *         type: string
- */
+// /**
+//  * @swagger
+//  * definitions:
+//  *   scanBlockReq:
+//  *     properties:
+//  *       start:
+//  *         type: string
+//  *       end:
+//  *         type: string
+//  */
 
 /**
  * @swagger
@@ -127,24 +127,24 @@ router.post("/queryNewestBlock", accountController.queryNewestBlockIndexControll
 
 
 
-/**
- * @swagger
- * /account/scanBlock:
- *  post:
- *    tags:
- *      - account
- *    summary: query infomatio of the specific block height
- *    description: query infomatio of the specific block height
- *    requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/definitions/scanBlockReq'
- *    responses:
- *      200:
- *        description: return the data
- */
-router.post("/scanBlock", accountController.scanBlockController);
+// /**
+//  * @swagger
+//  * /account/scanBlock:
+//  *  post:
+//  *    tags:
+//  *      - account
+//  *    summary: query infomatio of the specific block height
+//  *    description: query infomatio of the specific block height
+//  *    requestBody:
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             $ref: '#/definitions/scanBlockReq'
+//  *    responses:
+//  *      200:
+//  *        description: return the data
+//  */
+// router.post("/scanBlock", accountController.scanBlockController);
 
 
 /**
@@ -167,19 +167,20 @@ router.post("/scanBlock", accountController.scanBlockController);
 router.post("/tokenBalance", accountController.account_balance_controller);
 
 
-/**
- * @swagger
- * /account/getPid:
- *  get:
- *    tags:
- *      - account
- *    summary: get ICP address through generated principal id
- *    description: get ICP address through generated principal id
- *    responses:
- *      200:
- *        description: return new ICP address
- */
-router.get("/getPid", accountController.get_pid_controller);
+// /**
+//  * @swagger
+//  * /account/getPid:
+//  *  get:
+//  *    tags:
+//  *      - account
+//  *    summary: get ICP address through generated principal id
+//  *    description: get ICP address through generated principal id
+//  *    responses:
+//  *      200:
+//  *        description: return new ICP address
+//  */
+// router.get("/getPid", accountController.get_pid_controller);
+
 // /**
 //  * @swagger
 //  * /account/queryMemonic:
