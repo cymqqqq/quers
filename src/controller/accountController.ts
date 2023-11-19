@@ -16,7 +16,7 @@ import {
     createBlockActor,
     createLedgerActor,
 } from "./actorController";
-import { shiku_wallet_user_data_service, shiku_wallet_user_phase_find_service } from './dataServiceController';
+// import { shiku_wallet_user_data_service, shiku_wallet_user_phase_find_service } from './dataServiceController';
 import { JsonObject } from '@dfinity/candid';
 // set subaccount base value
 const SUB_ACCOUNT_ZERO = Buffer.alloc(32);
@@ -251,25 +251,25 @@ export const withdraw_controller = async (req: any, res: any, next: any) => {
 
 
 // refund controller 
-export const refund_controller = async (req: any, res: any) => {
-    try {
-        // set refund result variable
-        let send_res: any = {};
-        let phase: any;
-        phase = await shiku_wallet_user_phase_find_service(req.body.from_principal);
-        // perform refund action
-        send_res = await send(phase, req.body.to_principal, req.body.amount, req.body.canister_id);
-        // return json
-        res.json({
-            result: send_res.Ok.toString()
-        }) 
-    } catch (e) {
-        console.log("interface error ", e);
-        res.json(
-            {result: e}
-        ) 
-    }
-}
+// export const refund_controller = async (req: any, res: any) => {
+//     try {
+//         // set refund result variable
+//         let send_res: any = {};
+//         let phase: any;
+//         phase = await shiku_wallet_user_phase_find_service(req.body.from_principal);
+//         // perform refund action
+//         send_res = await send(phase, req.body.to_principal, req.body.amount, req.body.canister_id);
+//         // return json
+//         res.json({
+//             result: send_res.Ok.toString()
+//         }) 
+//     } catch (e) {
+//         console.log("interface error ", e);
+//         res.json(
+//             {result: e}
+//         ) 
+//     }
+// }
 
 
 
@@ -330,18 +330,18 @@ export const account_balance_controller = async (req: any, res: any) => {
 
 
 
-// export const generatePid = async () => {
-//     const TEST_MNEMONIC = generateMnemonic();
-//     let identity = await getIdentityFromSeed(TEST_MNEMONIC);
-//     let pid_str = identity.getPrincipal()
-//     let account = getAccountId(pid_str, SUB_ACCOUNT_ZERO)
-//     let json_ = {
-//         "memory": TEST_MNEMONIC,
-//         "pid": identity.getPrincipal().toString(),
-//         "account": account
-//     }
-//     return json_; 
-// }
+export const generatePid = async () => {
+    const TEST_MNEMONIC = generateMnemonic();
+    let identity = await getIdentityFromSeed(TEST_MNEMONIC);
+    let pid_str = identity.getPrincipal()
+    let account = getAccountId(pid_str, SUB_ACCOUNT_ZERO)
+    let json_ = {
+        "memory": TEST_MNEMONIC,
+        "pid": identity.getPrincipal().toString(),
+        "account": account
+    }
+    return json_; 
+}
 
 // export const query_memonic_controller = async (req: any, res: any, next: any) => {
 //     const icWalletUserRepo = DI.em.fork().getRepository(icWalletUser);

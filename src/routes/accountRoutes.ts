@@ -200,23 +200,23 @@ router.post("/tokenBalance", accountController.account_balance_controller);
 //  */
 // router.post("/queryMemonic", accountController.query_memonic_controller);
 /**
- * @swagger
- * /account/refund:
- *  post:
- *    tags:
- *      - account
- *    summary: user refund icp to shiku account.
- *    description: user refund icp to shiku account.
- *    requestBody:
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/definitions/RefundReq'
- *    responses:
- *      200:
- *        description: return block height
- */
-router.post("/refund", accountController.refund_controller);
+//  * @swagger
+//  * /account/refund:
+//  *  post:
+//  *    tags:
+//  *      - account
+//  *    summary: user refund icp to shiku account.
+//  *    description: user refund icp to shiku account.
+//  *    requestBody:
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             $ref: '#/definitions/RefundReq'
+//  *    responses:
+//  *      200:
+//  *        description: return block height
+//  */
+// router.post("/refund", accountController.refund_controller);
 
 
 /**

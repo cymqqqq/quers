@@ -1,7 +1,9 @@
 import { Options } from '@mikro-orm/core';
 
 
-import { icWalletUser } from "../entities/UserEntity";
+import { PrivateData } from "../entities/UserEntity";
+import { ProfileData } from "../entities/ProfileEntity";
+
 /** 
  * Mikro ORM Connection options object
  * If using a different database other than Mongo DB change 
@@ -9,7 +11,7 @@ import { icWalletUser } from "../entities/UserEntity";
  *  */
 export const options: Options = {
   type: 'mongo',
-  entities: [icWalletUser],
+  entities: [PrivateData,ProfileData],
   // dbName: 'TechDem
   dbName: 'ic-wallet',
   debug: true

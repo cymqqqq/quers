@@ -1,7 +1,7 @@
 import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/core';
 import {options} from './mikro-orm.config';
 
-import { icWalletUser } from "../entities/UserEntity";
+import { PrivateData } from "../entities/UserEntity";
 
 /**
  * This demo makes use of Mikro ORM to manage the database connection and CRUD operations of our User entity (https://mikro-orm.io/)
@@ -10,7 +10,7 @@ import { icWalletUser } from "../entities/UserEntity";
 export const DI = {} as {
   orm: MikroORM,
   em: EntityManager,
-  userRepository: EntityRepository<icWalletUser>,
+  // userRepository: EntityRepository<PrivateData>,
 };
 
 
@@ -18,7 +18,7 @@ export const DI = {} as {
  * Initiate connection to the database
  */
 export async function connect() {
-  options.clientUrl = process.env.SHIKU_DATABASE;
+  options.clientUrl = process.env.DATABASE;
   // options.clientUrl = "mongodb://192.168.1.18:27017/?retryWrites=true&w=majority";
 
   DI.orm = await MikroORM.init(options);
