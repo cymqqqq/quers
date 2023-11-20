@@ -31,7 +31,7 @@ export async function callback(req: any, res: any, next: any) {
   if (state !== sessionState) {
     return res.status(400).send('Stored tokens didnt match!');
   }
-  Client.loginWithOAuth2({ code, codeVerifier, redirectUri: CALLBACK_URL })
+  Client.loginWithOAuth2({ code, codeVerifier, redirectUri: "http://127.0.0.1:4000" })
     .then(async ({ client: loggedClient, accessToken, refreshToken, expiresIn }) => {
       // {loggedClient} is an authenticated client in behalf of some user
       // Store {accessToken} somewhere, it will be valid until {expiresIn} is hit.
