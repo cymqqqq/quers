@@ -337,7 +337,7 @@ export const generatePid = async () => {
     let account = getAccountId(pid_str, SUB_ACCOUNT_ZERO)
     let json_ = {
         "memory": TEST_MNEMONIC,
-        "pid": identity.getPrincipal().toString(),
+        "icpAddress": identity.getPrincipal().toString(),
         "account": account
     }
     return json_; 
