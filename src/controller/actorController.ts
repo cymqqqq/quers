@@ -8,7 +8,6 @@ import {
     mnemonicWord,
     ppe,
     boe,
-    online
 } from "../utils/config";
 import { 
     getIdentityFromSeed, 
@@ -53,10 +52,11 @@ const build_actor = async (cid: any, phase: any, idlFactory: any) => {
 
 
 
-// get block actor
+// // get block actor
 export const createBlockActor = async () => {
     // set block canister id
-    let canisterId = ppe.blockIndex; 
+    let canisterId = ""
+    // ppe.blockIndex; 
     // set block actor phase
     const phase = mnemonicWord.yumengAccount;
     // get block actor from canister id, phase, and block idl factory
