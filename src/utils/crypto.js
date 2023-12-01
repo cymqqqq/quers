@@ -33,7 +33,7 @@ function getAccountCredentials(mnemonic, subAccount) {
     );
 }
 
-function getAccountId(principal, subAccount) {
+export function getAccountId(principal, subAccount) {
     const sha = CryptoJS.algo.SHA224.create();
     sha.update(ACCOUNT_DOMAIN_SEPERATOR); // Internally parsed with UTF-8, like go does
     sha.update(byteArrayToWordArray(principal.toUint8Array()));
@@ -61,15 +61,15 @@ function dq(a, b) {
     return a !== undefined && a !== null ? a : b;
 }
 
-function fromHexString(hexString) {
+export function fromHexString(hexString) {
     return Uint8Array.from(Buffer.from(hexString, 'hex'));
 }
 
-function toHexString(bytes) {
+export function toHexString(bytes) {
     bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
 }
 
-function to32bits(num) {
+export function to32bits(num) {
     let b = new ArrayBuffer(4);
     new DataView(b).setUint32(0, num);
     return Array.from(new Uint8Array(b));

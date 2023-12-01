@@ -1,5 +1,6 @@
 // identity.js
-import { Ed25519KeyIdentity, Secp256k1KeyIdentity } from "@dfinity/identity";
+import { Ed25519KeyIdentity } from "@dfinity/identity";
+import { Secp256k1KeyIdentity } from "@dfinity/identity-secp256k1";
 import hdkey from "hdkey";
 import { mnemonicToSeed, generateMnemonic } from "bip39";
 
