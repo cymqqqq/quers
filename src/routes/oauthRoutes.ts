@@ -1,15 +1,7 @@
 import express from "express";
-import * as getTwitterUserProfileController from "../controller/oauthController";
+import * as getTwitterUserProfileController from "../controllers/oauthController";
 
 const router = express.Router();
-// /**
-//  * @swagger
-//  * definitions:
-//  *   oauthReq:
-//  *     properties:
-//  *       username:
-//  *         type: string
-//  */ 
 /**
  * @swagger
  * /twitter/oauth:
@@ -24,23 +16,6 @@ const router = express.Router();
  */
 router.get("/oauth", getTwitterUserProfileController.twitter);
 
-// *    requestBody:
-// *       content:
-// *         application/json:
-// *           schema:
-// *             $ref: '#/definitions/oauthReq'
-
-// /**
-//  * @swagger
-//  * definitions:
-//  *   oauthCallbackReq:
-//  *     properties:
-//  *       query:
-//  *         type: any
-//  *       session:
-//  *         type: any
-//  */ 
-
 /**
  * @swagger
  * /twitter/callback:
@@ -54,10 +29,20 @@ router.get("/oauth", getTwitterUserProfileController.twitter);
  *        description: return the data
  */
 router.get("/callback", getTwitterUserProfileController.callback);
-// *    requestBody:
-// *       content:
-// *         application/json:
-// *           schema:
-// *             $ref: '#/definitions/oauthCallbackReq'
+
+/**
+ * @swagger
+ * /twitter/user:
+ *  get:
+ *    tags:
+ *      - twitter
+ *    summary: query user profile
+ *    description:  query user profile
+ *    responses:
+ *      200:
+ *        description: return the data
+ */
+router.get("/user", getTwitterUserProfileController.get_user);
+
 
 export default router

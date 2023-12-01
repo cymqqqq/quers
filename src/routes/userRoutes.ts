@@ -1,5 +1,5 @@
 import express from "express";
-import * as UserController from "../controller/userController";
+import * as UserController from "../controllers/userController";
 
 const router = express.Router();
 /**
@@ -140,8 +140,8 @@ router.post("/updateUserHolders", UserController.update_user_holders_controller)
  *  post:
  *    tags:
  *      - user
- *    summary: update user holding
- *    description: update user holding
+ *    summary: update user tvl
+ *    description: update user tvl
  *    requestBody:
  *       content:
  *         application/json:
@@ -152,5 +152,154 @@ router.post("/updateUserHolders", UserController.update_user_holders_controller)
  *        description: return the data
  */
 router.post("/updateUserTvl", UserController.update_user_tvl_controller);
+
+
+/**
+ * @swagger
+ * definitions:
+ *   updateUserPrincipalReq:
+ *     properties:
+ *       principal:
+ *         type: string
+ */ 
+
+/**
+ * @swagger
+ * /user/updateUserPrincipal:
+ *  post:
+ *    tags:
+ *      - user
+ *    summary: update user principal
+ *    description: update user principal
+ *    requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/updateUserPrincipalReq'
+ *    responses:
+ *      200:
+ *        description: return the data
+ */
+router.post("/updateUserPrincipal", UserController.set_user_principal);
+
+
+/**
+ * @swagger
+ * definitions:
+ *   updateUserNameReq:
+ *     properties:
+ *       owner:
+ *         type: string
+ *       username:
+ *         type: string
+ */ 
+
+/**
+ * @swagger
+ * /user/updateUserName:
+ *  post:
+ *    tags:
+ *      - user
+ *    summary: update user principal
+ *    description: update user principal
+ *    requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/updateUserNameReq'
+ *    responses:
+ *      200:
+ *        description: return the data
+ */
+router.post("/updateUserName", UserController.update_username);
+
+
+/**
+ * @swagger
+ * definitions:
+ *   updateNameReq:
+ *     properties:
+ *       owner:
+ *         type: string
+ *       name:
+ *         type: string
+ */ 
+
+/**
+ * @swagger
+ * /user/updateName:
+ *  post:
+ *    tags:
+ *      - user
+ *    summary: update name
+ *    description: update name
+ *    requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/updateNameReq'
+ *    responses:
+ *      200:
+ *        description: return the data
+ */
+router.post("/updateName", UserController.update_name);
+
+/**
+ * @swagger
+ * definitions:
+ *   getUserFollowersReq:
+ *     properties:
+ *       owner:
+ *         type: string
+ */ 
+
+/**
+ * @swagger
+ * /user/getUserFollowers:
+ *  post:
+ *    tags:
+ *      - user
+ *    summary: get user followers
+ *    description: get user followers
+ *    requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/getUserFollowersReq'
+ *    responses:
+ *      200:
+ *        description: return the data
+ */
+router.post("/getUserFollowers", UserController.get_user_followers);
+
+/**
+ * @swagger
+ * definitions:
+ *   getUserFollowingReq:
+ *     properties:
+ *       owner:
+ *         type: string
+ */ 
+
+/**
+ * @swagger
+ * /user/getUserFollowing:
+ *  post:
+ *    tags:
+ *      - user
+ *    summary: get user followers
+ *    description: get user followers
+ *    requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/definitions/getUserFollowingReq'
+ *    responses:
+ *      200:
+ *        description: return the data
+ */
+router.post("/getUserFollowing", UserController.get_user_following);
+
+
 
 export default router
