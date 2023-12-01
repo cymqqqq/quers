@@ -22,7 +22,7 @@ export async function get_user_profile_controller(req: any, res: any, next: any)
                 console.log("result ", result)
                 res.json({
                     code: 20000,
-                    data: result,
+                    data: result.Success,
                 })
             })
         })
@@ -142,6 +142,101 @@ export async function update_user_tvl_controller(req: any, res: any, next: any) 
         console.log("error ", e)
         res.json({
             result: e
+        })
+    }
+}
+
+export async function set_user_principal(req:any, res: any, next: any) {
+    try {
+        let principal = req.body.principal
+        createUserActor().then((actor: any) => {
+            actor.set_user_principal({
+                owner: Principal.fromText(principal),
+            }).then((result: any) => {
+                console.log("result ", result)
+                res.json({
+                    code: 20000,
+                    data: result,
+                })
+            })
+        })
+    } catch (err) {
+        console.log("error ", err)
+        res.json({
+            result: err
+        })
+    }
+}
+
+
+export async function update_username(req:any, res: any, next: any) {
+    try {
+        let owner = req.body.owner
+        let username = req.body.username
+        createUserActor().then((actor: any) => {
+            actor.update_username({
+                owner: Principal.fromText(owner),
+                username: username,
+            }).then((result: any) => {
+                console.log("result ", result)
+                res.json({
+                    code: 20000,
+                    data: result,
+                })
+            })
+        })
+    } catch (err) {
+        console.log("error ", err)
+        res.json({
+            result: err
+        })
+    }
+}
+
+export async function update_name(req:any, res: any, next: any) {
+    try {
+        let name = req.body.name
+        let owner = req.body.owner
+
+        createUserActor().then((actor: any) => {
+            actor.update_name({
+                owner: Principal.fromText(owner),
+                name: name,
+            }).then((result: any) => {
+                console.log("result ", result)
+                res.json({
+                    code: 20000,
+                    data: result,
+                })
+            })
+        })
+    } catch (err) {
+        console.log("error ", err)
+        res.json({
+            result: err
+        })
+    }
+}
+
+export async function get_user_followers(req:any, res: any, next: any) {
+    try {
+        let owner = req.body.owner
+
+        createUserActor().then((actor: any) => {
+            actor.get_user_followers({
+                owner: Principal.fromText(owner),
+            }).then((result: any) => {
+                console.log("result ", result.Success)
+                res.json({
+                    code: 20000,
+                    data: result.Success,
+                })
+            })
+        })
+    } catch (err) {
+        console.log("error ", err)
+        res.json({
+            result: err
         })
     }
 }
