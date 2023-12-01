@@ -3,6 +3,11 @@ import { Options } from '@mikro-orm/core';
 
 import { PrivateData } from "../entities/UserEntity";
 import { ProfileData } from "../entities/ProfileEntity";
+import { Question } from '../entities/QuestionEntity';
+import { Answer } from '../entities/AnswerEntity';
+import  { Comment} from '../entities/CommentsEntity'
+import  { HotEntity} from '../entities/HotEntity'
+
 
 /** 
  * Mikro ORM Connection options object
@@ -11,19 +16,10 @@ import { ProfileData } from "../entities/ProfileEntity";
  *  */
 export const options: Options = {
   type: 'mongo',
-  entities: [PrivateData,ProfileData],
+  entities: [PrivateData,ProfileData, Question, Answer, Comment, HotEntity],
   // dbName: 'TechDem
-  dbName: 'ic-wallet',
+  dbName: 'bitask',
   debug: true
 };
 
 
-// export const yumi_nft_options: Options = {
-//   type: 'mongo',
-//   entities: [YumiNft],
-//   // dbName: 'TechDem
-//   dbName: 'yumi-nft-database',
-//   debug: true
-// };
-
-// export default {options, yumi_nft_options};

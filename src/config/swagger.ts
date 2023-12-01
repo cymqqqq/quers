@@ -7,9 +7,9 @@ const options = {
     definition: {
         openapi: "3.0.1",
         info: {
-            title: "quers api doc",
+            title: "quers_api_doc",
             version: '1.0.0',
-            description: "quers api doc"
+            description: "quers-api-doc"
         },
     },
     apis: [path.join(__dirname, '../routes/*')]
